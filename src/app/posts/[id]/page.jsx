@@ -5,8 +5,23 @@ const getSinglePost = async (id) => {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
     const data = await res.json();
     return data;
-    
+
 }
+
+export async function generateMetadata({ params }) {
+    // read route params
+    const { id } = await params
+
+    // fetch data
+    const signlePost = await getSinglePost(id)
+
+    return {
+        title: signlePost.title,
+        description: signlePost.body,
+    }
+}
+
+
 
 const SignlePost = async ({ params }) => {
     const post = await getSinglePost(params.id);
