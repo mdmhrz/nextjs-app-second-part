@@ -1,5 +1,12 @@
+import Link from "next/link";
 import MealSearchInput from "./components/MealSearchInput";
 import Style from './meals.module.css';
+import Image from "next/image";
+
+export const metadata = {
+    title: 'All Meals',
+    description: "Meals Search Page, find your favorite meals here.",
+};
 
 
 
@@ -30,8 +37,11 @@ const MealsPage = async ({ searchParams }) => {
                 {meals.map((meal) => (
                     <div key={meal.idMeal} className={`p-4 border-b mb-2 border-gray-200 ${Style.testing}`}>
                         <h2 className='text-xl font-bold'>{meal.strMeal}</h2>
-                        <img src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-auto' />
+                        <Image width={641} height={641} src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-auto' />
                         <p className='text-gray-500'>{meal.strInstructions.slice(0, 100)}...</p>
+                        <Link href={`/meals/${meal.idMeal}`}>
+                            <button className='bg-green-600 px-2 text-white py-1 rounded-md cursor-pointer'>Details</button>
+                        </Link>
                     </div>
                 ))}
             </div>
