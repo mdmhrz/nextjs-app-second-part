@@ -1,25 +1,30 @@
 import React from 'react';
 import { headers } from 'next/headers';
+import { getProducts } from '../actions/products/getProducts';
 
-export const dynamic = 'force-dynamic'; // ensure runtime rendering
+// export const dynamic = 'force-dynamic'; // ensure runtime rendering
 
 const ProductsPage = async () => {
     // Get the current host dynamically from the request headers
-    const host = headers().get('host'); // e.g., "localhost:3000" or "your-app.vercel.app"
-    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-    const baseUrl = `${protocol}://${host}`;
+    // const host = headers().get('host'); // e.g., "localhost:3000" or "your-app.vercel.app"
+    // const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    // const baseUrl = `${protocol}://${host}`;
 
-    // Fetch data from your API route
-    const res = await fetch(`${baseUrl}/api/items`, {
-        cache: 'no-store', // disable caching for fresh data
-        next: { revalidate: 0 } // ensure no ISR
-    });
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch products');
-    }
+    // // Fetch data from your API route
+    // const res = await fetch(`${baseUrl}/api/items`, {
+    //     cache: 'no-store', // disable caching for fresh data
+    //     next: { revalidate: 0 } // ensure no ISR
+    // });
 
-    const data = await res.json();
+    // if (!res.ok) {
+    //     throw new Error('Failed to fetch products');
+    // }
+
+    // const data = await res.json();
+
+
+    const data = await getProducts();
 
     return (
         <div>

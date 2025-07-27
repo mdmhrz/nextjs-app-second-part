@@ -13,7 +13,5 @@ export async function POST(req) {
     const postedData = await req.json();
     const data = await dbConnect('users').insertOne(postedData);
     revalidatePath('/products');
-
-
     return Response.json({ data })
 }
