@@ -1,15 +1,17 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const ProductAddForm = () => {
+    const router = useRouter();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const userName = formData.get('name');
         const userEmail = formData.get('email');
 
-        const res = await fetch('http://localhost:3000/api/items', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/items`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,9 +20,9 @@ const ProductAddForm = () => {
         });
 
         if (res.ok) {
-            console.log('Product added successfully');
-            formData.set('name', '');
-            formData.set('email', '');
+            console.log('User added successfully');
+            router.push('/products');
+            e.target.reset()
         } else {
             console.error('Failed to add product');
         }
