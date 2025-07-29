@@ -11,7 +11,7 @@ export const metadata = {
 
 
 const MealsPage = async ({ searchParams }) => {
-    const query = await searchParams.search || '';
+    const query = await searchParams?.search || '';
 
     const fetchMeals = async () => {
         try {
